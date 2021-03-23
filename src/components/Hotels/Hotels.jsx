@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, FlexCenterCenter, FormInput, Row } from '../shared/styles'
+import { Col, FlexCenterCenter, FormInput, FormLabel, InputGroup, Row } from '../shared/styles'
 import Hotel from './Hotel'
 import { HotelsContainer, HotelListContainer, SortByContainer, SortByBtn, FilterHeaderContainer, ResetBtn } from './styles'
 
@@ -42,29 +42,37 @@ const Hotels = ({hotels, nights, setHotels}) => {
         <div>
           <Row>
             <FilterHeaderContainer>
-              <Col size={2}>
-                <FormInput
-                  onChange={(e) => setNameFilter(e.target.value)}
-                  placeholder='filter By Name:'
-                  value={nameFilter}
-                  type={'text'}
-                />
-                <FlexCenterCenter>
+              <Col size={3}>
+                <InputGroup>
+                  <FormLabel>Hotel Name</FormLabel>
                   <FormInput
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    onChange={(e) => setNameFilter(e.target.value)}
                     placeholder='filter By Name:'
-                    value={priceRange}
-                    type={'range'}
-                    min={0}
-                    max={10000}
+                    value={nameFilter}
+                    type={'text'}
                   />
+                </InputGroup>
+              </Col>
+              <Col style={{marginLeft: '0.5rem'}} size={3}>
+                <FlexCenterCenter>
+                  <InputGroup>
+                    <FormLabel>Price Range</FormLabel>
+                    <FormInput
+                      onChange={(e) => setPriceRange(e.target.value)}
+                      placeholder='filter By Name:'
+                      value={priceRange}
+                      type={'range'}
+                      min={0}
+                      max={10000}
+                    />
+                  </InputGroup>
                   {priceRange}
                 </FlexCenterCenter>
               </Col>
-              <Col size={10}>
+              <Col size={6}>
                 <SortByContainer>
-                  <SortByBtn onClick={handleSortByName}>Sort By name</SortByBtn>
-                  <SortByBtn onClick={handleSortByPrice}>Sort By price</SortByBtn>
+                  <SortByBtn onClick={handleSortByName}>Sort by Name</SortByBtn>
+                  <SortByBtn onClick={handleSortByPrice}>Sort by Price</SortByBtn>
                 </SortByContainer>
               </Col>
             </FilterHeaderContainer>
