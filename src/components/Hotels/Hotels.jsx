@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Col, FormInput, Row } from '../shared/styles'
+import { Col, FlexCenterCenter, FormInput, Row } from '../shared/styles'
 import Hotel from './Hotel'
 import { HotelsContainer, HotelListContainer, SortByContainer, SortByBtn, FilterHeaderContainer, ResetBtn } from './styles'
 
 const Hotels = ({hotels, nights, setHotels}) => {
   const [hotelsToRender, setHotelsToRender] = useState(hotels);
+  const [nameFilter, setNameFilter] = useState('');
+  const [priceRange, setPriceRange] = useState(0);
 
   const handleSortByName = () => {
     const arr = [...hotelsToRender];
@@ -17,17 +19,21 @@ const Hotels = ({hotels, nights, setHotels}) => {
     setHotelsToRender(arr);
   }
 
-  const handleOnchange = (e) => {
-    const val = e.target.value;
-    if(val !== ''){
-      setHotelsToRender(hotelsToRender.filter(hotel => {
-        return hotel.name.toUpperCase().includes(val.toUpperCase())
-      }));
+  let hotelsList = [...hotelsToRender].filter(hotel => {
+    if(nameFilter !== ''){
+        return hotel.name.toUpperCase().includes(nameFilter.toUpperCase())
     }
     else{
-      setHotelsToRender(hotels)
+      return true;
     }
-  }
+  }).filter(hotel => {
+    if(priceRange !== '0'){
+        return (Number(hotel.price) * Number(nights)) <= Number(priceRange)
+    }
+    else{
+      return true;
+    }
+  });
 
   return (
     <HotelsContainer>
@@ -38,10 +44,22 @@ const Hotels = ({hotels, nights, setHotels}) => {
             <FilterHeaderContainer>
               <Col size={2}>
                 <FormInput
-                  onChange={(e) => handleOnchange(e)}
+                  onChange={(e) => setNameFilter(e.target.value)}
                   placeholder='filter By Name:'
+                  value={nameFilter}
                   type={'text'}
                 />
+                <FlexCenterCenter>
+                  <FormInput
+                    onChange={(e) => setPriceRange(e.target.value)}
+                    placeholder='filter By Name:'
+                    value={priceRange}
+                    type={'range'}
+                    min={0}
+                    max={10000}
+                  />
+                  {priceRange}
+                </FlexCenterCenter>
               </Col>
               <Col size={10}>
                 <SortByContainer>
@@ -52,7 +70,7 @@ const Hotels = ({hotels, nights, setHotels}) => {
             </FilterHeaderContainer>
           </Row>
           <Row>
-            <Col size={12}>{hotelsToRender.map(hotel => <Col key={hotel.name} size={6} lg={12}><Hotel hotel={hotel} nights={nights}/></Col>)}</Col>
+            <Col size={12}>{hotelsList.map(hotel => <Col key={hotel.name} size={6} lg={12}><Hotel hotel={hotel} nights={nights}/></Col>)}</Col>
           </Row>
         </div>
       </HotelListContainer>

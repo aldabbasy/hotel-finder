@@ -27,6 +27,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const FlexCenterCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 export const Container = styled.div`
   width: 100%;
 `;
