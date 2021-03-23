@@ -11,6 +11,7 @@ export const HotelsContainer = styled.main`
 `;
 
 export const HotelListContainer = styled.div`
+  margin-top: 85px;
   width: 63rem;
   padding: 50px;
   border-radius: 15px;
@@ -59,6 +60,25 @@ export const SortByBtn = styled.button`
   border: none;
   border-radius: 14px;
   margin-left: 0.5rem;
+  &:focus{
+    outline: none;
+  }
+  &:hover{
+    filter: brightness(90%);
+    cursor: pointer;
+  }
+`;
+export const ResetBtn = styled.button`
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  width: 65px;
+  height: 30px;
+  background: ${Colors.primary};
+  color: ${Colors.white};
+  border: none;
+  border-radius: 14px;
   &:focus{
     outline: none;
   }

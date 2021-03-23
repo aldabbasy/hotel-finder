@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Col, FormInput, Row } from '../shared/styles'
 import Hotel from './Hotel'
-import { HotelsContainer, HotelListContainer, SortByContainer, SortByBtn, FilterHeaderContainer } from './styles'
+import { HotelsContainer, HotelListContainer, SortByContainer, SortByBtn, FilterHeaderContainer, ResetBtn } from './styles'
 
 const Hotels = ({hotels, nights, setHotels}) => {
   const [hotelsToRender, setHotelsToRender] = useState(hotels);
@@ -31,6 +31,7 @@ const Hotels = ({hotels, nights, setHotels}) => {
 
   return (
     <HotelsContainer>
+      <ResetBtn onClick={() => setHotels(null)}>Reset</ResetBtn>
       <HotelListContainer>
         <div>
           <Row>
