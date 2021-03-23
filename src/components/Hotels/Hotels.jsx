@@ -6,7 +6,7 @@ import { HotelsContainer, HotelListContainer, SortByContainer, SortByBtn, Filter
 const Hotels = ({hotels, nights, setHotels}) => {
   const [hotelsToRender, setHotelsToRender] = useState(hotels);
   const [nameFilter, setNameFilter] = useState('');
-  const [priceRange, setPriceRange] = useState(0);
+  const [priceRange, setPriceRange] = useState('0');
 
   const handleSortByName = () => {
     const arr = [...hotelsToRender];
@@ -27,7 +27,7 @@ const Hotels = ({hotels, nights, setHotels}) => {
       return true;
     }
   }).filter(hotel => {
-    if(priceRange !== '0'){
+    if(Number(priceRange) !== 0){
         return (Number(hotel.price) * Number(nights)) <= Number(priceRange)
     }
     else{
